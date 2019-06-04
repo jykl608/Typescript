@@ -1,8 +1,7 @@
 {
-    "files": [
-        "src/classes/index.ts",
-        "src/classes/ExampleClass.ts",
-        "src/main.ts"
+    "includes": [
+        "src/**/*.ts",
+        "src/*.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,
