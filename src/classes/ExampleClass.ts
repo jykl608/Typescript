@@ -6,7 +6,7 @@ export class ExampleClass {
 
     constructor(
         private name: string,
-        private age: number
+        private age?: number
     ){}
 
     public getName() {
