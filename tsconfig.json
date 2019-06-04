@@ -1,5 +1,6 @@
 {
     "includes": [
+        "services/*.ts",
         "src/**/*.ts",
         "src/*.ts"
     ],
