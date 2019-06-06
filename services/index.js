@@ -1,1 +1,0 @@
-export {mock} from './mock.data'
