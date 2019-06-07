@@ -1,7 +1,8 @@
 {
     "includes": [
         "src/**/*.ts",
-        "src/*.ts"
+        "src/*.ts",
+        "services/resources/*.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,
