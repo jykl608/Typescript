@@ -1,1 +1,5 @@
-function greetings(){console.log("Hello world")}greetings();
+function greetings() {
+    console.log('Hello world');
+}
+
+greetings();
