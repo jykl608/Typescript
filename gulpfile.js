@@ -17,14 +17,20 @@ exports.default = function() {
         .pipe(dest('./output/minified'))
 }
 
-// exports.delete = async function() {
-//     console.log('-------- delete ---------');
-//     del(['./output'], function(){
-//         console.log('./output deleted');
-//     })
-// }
-exports.delete = function() {
-    console.log('-------- delete ---------');
+// del all .js files except
+// ./vendor and gulpfile.js
+exports.cleanTest = function() {
+    console.log('-------- cleanTest ---------');
+    return new Promise((resolve) => {
+        del([  '**/*.js',  '!gulpfile.js',  '!./vendor/*.js'  ], function(){
+            console.log('cleanTest() done');
+        });
+        resolve();
+    })
+}
+
+exports.clean = function() {
+    console.log('-------- clean ---------');
     return new Promise((resolve) => {
         del(['./output'], function(){
             console.log('./output deleted');
@@ -32,3 +38,11 @@ exports.delete = function() {
         resolve();
     });
 }
+
+// exports.delete = async function() {
+//     console.log('-------- delete ---------');
+//     del(['./output'], function(){
+//         console.log('./output deleted');
+//     })
+// }
+
