@@ -1,11 +1,10 @@
 {
     "includes": [
-        "src/**/*.ts",
-        "src/*.ts",
+        "src/scripts/*.ts",
         "services/resources/*.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,
-        "target": "es2015"    
+        "target": "es5"
     }
 }

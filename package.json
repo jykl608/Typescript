@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts": "tsc",
-    "start": "tsc && gulp",
-    "clean": "rm -fr output",
-    "clean-all": "rm -fr output && rm -fr dist"
+    "clean": "gulp clean",
+    "build": "npm run clean && gulp default"
   },
   "author": "Jake Kwon",
   "license": "ISC",

@@ -1,54 +1,42 @@
-const { src, dest} = require('gulp');
-const babel = require('gulp-babel');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const del = require('delete');
-// import cache from 'gulp-cache';
-const cache = require('gulp-cache');
+var gulp = require("gulp");
+var del = require("delete");
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject({
+    declaration: true,
+    noImplicitAny: true,
+    target: "es5"
+});
 
-// exports.default = function() {
-//     console.log('-------- default ---------');
-//     return src('./src/samples/*.js')
-//         .pipe(babel())
-//         .pipe( src('./vendor/*.js') )
-//         .pipe( dest('./output') )
-//         .pipe( uglify() )
-//         .pipe( rename({
-//             extname: '.min.js'
-//         }))
-//         .pipe(dest('./output/minified'))
-// }
+gulp.task("copy-html", function(){
+    return gulp.src(['./src/index.html'])
+        .pipe(gulp.dest("./dist"))
+});
 
-exports.default = function(cb) {
-    console.log('-------- default task ---------');
-    cb();
-}
+// https://stackoverflow.com/questions/43472778/typescript-exports-is-not-defined
+gulp.task("default",  gulp.series( gulp.parallel("copy-html"), function(cb) {
+    return gulp.src(['./src/scripts/**/*.ts'])
+        .pipe(tsProject())
+        .js
+        .pipe(gulp.dest("./dist/scripts"))
+}));
 
-exports.clear = function(cb) {
-    console.log('-------- clear ---------');
-    cache.clearAll();  
-    cb();  
-}
+// gulp.task("task1", function(cb) {
+//     console.log('----- task 1 -----');
+//     cb();
+// });
 
-// del all .js files except
-// ./vendor and gulpfile.js
-exports.cleanTest = function() {
-    console.log('-------- cleanTest ---------');
-    return new Promise((resolve) => {
-        del([  '**/*.js',  '!gulpfile.js',  '!./vendor/*.js'  ], function(){
-            console.log('cleanTest() done');
-        });
-        resolve();
-    })
-}
+// gulp.task("default", gulp.series( gulp.parallel("task1"), function(cb){
+//     console.log("----- default -----");
+//     cb();
+// }));
 
-exports.clean = function() {
-    console.log('-------- clean ---------');
-    return new Promise((resolve) => {
-        del(['./dist'], function(){
-            console.log('./dist deleted');
-        });
-        resolve();
+gulp.task("clean", function(cb) {
+    // console.log('clean');
+    del(['./dist'], function(err, deleted){
+        if (err) {
+            console.log('Error', err);
+        }
+        console.log('Deleted', deleted);
     });
-}
-
+    cb();
+});
